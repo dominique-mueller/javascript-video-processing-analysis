@@ -26,21 +26,18 @@ videoElement.addEventListener(
       const beforeRender: number = performance.now();
       videoProcessor.renderVideoFrame();
       const afterRender: number = performance.now();
-      const renderDuration: number = afterRender - beforeRender;
 
       // Get raw image data, and somehow use it
       const beforeExtract: number = performance.now();
       const imageData: Uint8ClampedArray = videoProcessor.extractPixels();
       const useImageData: number = imageData[0];
       const afterExtract: number = performance.now();
-      const extractDuration: number = afterExtract - beforeExtract;
 
       // Save performance profiling results
       performanceProfilerResults.push({
         timestamp: new Date().toISOString(),
-        renderDuration,
-        extractDuration,
-        duration: renderDuration + extractDuration,
+        renderDuration: afterRender - beforeRender,
+        extractDuration: afterExtract - beforeExtract,
       });
 
       // Continue or stop

@@ -1,0 +1,32 @@
+/* File upload */
+.file-upload {
+  padding: 48px;
+  background-color: #fff;
+  border: 2px solid #cbd5e0;
+  border-style: dashed;
+  outline: none;
+  text-align: center;
+}
+
+.file-upload__icon {
+  color: #a0aec0;
+  height: 24px;
+  width: 24px;
+}
+
+.file-upload__label {
+  font-size: 14px;
+  color: #718096;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.file-upload__button {
+  display: inline;
+  padding: 0;
+  color: #3182ce;
+  background: none;
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
+}
