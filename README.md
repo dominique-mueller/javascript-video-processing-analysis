@@ -15,6 +15,7 @@ Notes:
 - rAF loop
   - timeupdated no reliable
 - Video must be in visible screen area, and tab must be active
+- createImageBitmap() is very slow (https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/createImageBitmap)
 
 Source:
 

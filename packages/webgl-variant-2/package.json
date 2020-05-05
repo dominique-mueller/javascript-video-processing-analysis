@@ -1,5 +1,5 @@
 {
-  "name": "javascript-video-processing-experiment--canvas-2d",
+  "name": "javascript-video-processing-experiment--webgl-variant-2",
   "version": "1.0.0",
   "description": "JavaScript real-time video processing using Canvas",
   "private": true,
