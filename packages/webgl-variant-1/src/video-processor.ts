@@ -79,7 +79,7 @@ export class VideoProcessor {
       attribute vec2 aUV;
       varying vec2 vTex;
 
-      void main(void) {
+      void main() {
         gl_Position = vec4(aVertex, 0.0, 1.0);
         vTex = vec2(aUV.s, 1.0 - aUV.t);
       }
@@ -95,7 +95,7 @@ export class VideoProcessor {
       uniform sampler2D sampler0;
       varying vec2 vTex;
 
-      void main(void){
+      void main(){
         gl_FragColor = texture2D(sampler0, vTex);
       }
     `;

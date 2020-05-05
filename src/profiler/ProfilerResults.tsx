@@ -30,12 +30,7 @@ const ProfilerResults: FunctionComponent<{
         >
           <h3 className="card__title">Timeline</h3>
           <div className="card__content">
-            <div>
-              <ProfilerLineChart profilerResults={profilerResults} width={1280} height={200} />
-            </div>
-            <div style={{ marginTop: '-24px' }}>
-              {/* <ProfilerFlameChart profilerResults={profilerResults} width={1280} height={66} /> */}
-            </div>
+            <ProfilerLineChart profilerResults={profilerResults} width={1280} height={200} />
           </div>
         </div>
       </div>
