@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "outDir": "build"
+  },
+  "include": [
+    "./start-analysis.bin.ts"
+  ]
+}

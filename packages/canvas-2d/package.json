@@ -8,8 +8,12 @@
     "url": "https://github.com/dominique-mueller/javascript-video-processing-experiment"
   },
   "scripts": {
-    "build": "rimraf build && parcel build ./src/index.html --out-dir build",
-    "start": "rimraf build && parcel ./src/index.html --out-dir build"
+    "build": "npm run build:app && npm run build:bin",
+    "build:app": "rimraf build && parcel build ./src/index.html --out-dir build",
+    "build:bin": "tsc --project tsconfig.bin.json",
+    "start": "rimraf build && parcel ./src/index.html --out-dir build",
+    "start:build": "lite-server --baseDir=\"build\"",
+    "start:analysis": "node ./build/start-analysis.bin.js --headless false"
   },
   "dependencies": {
     "chalk": "4.0.x",

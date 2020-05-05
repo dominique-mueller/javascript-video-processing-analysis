@@ -45,25 +45,7 @@ videoElement.addEventListener(
 
       // Continue or stop
       if (hasVideoEnded) {
-        // console.log(performanceProfilerResults);
-        console.log(
-          'Average render duration',
-          performanceProfilerResults.reduce((acc, currentValue) => {
-            return acc + currentValue.renderDuration;
-          }, 0) / performanceProfilerResults.length,
-        );
-        console.log(
-          'Average extract duration',
-          performanceProfilerResults.reduce((acc, currentValue) => {
-            return acc + currentValue.extractDuration;
-          }, 0) / performanceProfilerResults.length,
-        );
-        console.log(
-          'Average duration',
-          performanceProfilerResults.reduce((acc, currentValue) => {
-            return acc + currentValue.duration;
-          }, 0) / performanceProfilerResults.length,
-        );
+        console.log(JSON.stringify(performanceProfilerResults, null, '  '));
         return;
       } else {
         requestAnimationFrame(renderFrame);
@@ -71,7 +53,9 @@ videoElement.addEventListener(
     };
 
     // Start
-    requestAnimationFrame(renderFrame);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(renderFrame);
+    });
   },
   { once: true },
 );
