@@ -1,20 +1,13 @@
-// Get elements
-const videoElement: HTMLVideoElement = document.getElementById('video') as HTMLVideoElement;
-
-// Create in-memory canvas
-const inMemoryCanvasElement: HTMLCanvasElement = document.createElement('canvas');
-// const inMemoryCanvasElement: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
-inMemoryCanvasElement.width = 1920;
-inMemoryCanvasElement.height = 1080;
-const inMemoryCanvasContext: CanvasRenderingContext2D = inMemoryCanvasElement.getContext('2d', {
-  alpha: false,
-}) as CanvasRenderingContext2D;
+import { VideoProcessor } from './video-processor';
 
 // Wait for the video to play
+const videoElement: HTMLVideoElement = document.getElementById('video') as HTMLVideoElement;
+const canvasElement: HTMLCanvasElement | undefined = (document.getElementById('canvas') as HTMLCanvasElement) || undefined;
 videoElement.addEventListener(
   'play',
   (): void => {
-    let performanceProfilerResults: Array<any> = [];
+    // Create video processor
+    const videoProcessor: VideoProcessor = new VideoProcessor(videoElement, canvasElement);
 
     // Get notified if the video has ended
     let hasVideoEnded: boolean = false;
@@ -27,32 +20,46 @@ videoElement.addEventListener(
     );
 
     // Render frame
+    let performanceProfilerResults: Array<any> = [];
     const renderFrame = (): void => {
       // Start performance profiling
-      const before: number = performance.now();
+      const beforeRender: number = performance.now();
+      videoProcessor.renderVideoFrame();
+      const afterRender: number = performance.now();
+      const renderDuration: number = afterRender - beforeRender;
 
-      // Draw the full image into the canvas
-      inMemoryCanvasContext.drawImage(videoElement, 0, 0, 1920, 1080, 0, 0, 1920, 1080);
-
-      // Get raw image data
-      const imageData: Uint8ClampedArray = inMemoryCanvasContext.getImageData(0, 0, 1920, 1080).data;
-
-      // Somehow use the image data (here by assigning it to another variable) to prevent any browser optimizations from breaking things
+      // Get raw image data, and somehow use it
+      const beforeExtract: number = performance.now();
+      const imageData: Uint8ClampedArray = videoProcessor.extractPixels();
       const useImageData: number = imageData[0];
-
-      // Stop performance profiling
-      const after: number = performance.now();
+      const afterExtract: number = performance.now();
+      const extractDuration: number = afterExtract - beforeExtract;
 
       // Save performance profiling results
       performanceProfilerResults.push({
         timestamp: new Date().toISOString(),
-        duration: after - before,
+        renderDuration,
+        extractDuration,
+        duration: renderDuration + extractDuration,
       });
 
       // Continue or stop
       if (hasVideoEnded) {
-        console.log(performanceProfilerResults);
+        // console.log(performanceProfilerResults);
         console.log(
+          'Average render duration',
+          performanceProfilerResults.reduce((acc, currentValue) => {
+            return acc + currentValue.renderDuration;
+          }, 0) / performanceProfilerResults.length,
+        );
+        console.log(
+          'Average extract duration',
+          performanceProfilerResults.reduce((acc, currentValue) => {
+            return acc + currentValue.extractDuration;
+          }, 0) / performanceProfilerResults.length,
+        );
+        console.log(
+          'Average duration',
           performanceProfilerResults.reduce((acc, currentValue) => {
             return acc + currentValue.duration;
           }, 0) / performanceProfilerResults.length,
