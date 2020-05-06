@@ -216,6 +216,7 @@ The following table shows a short test summary. See further chapters for more de
 
 - Using a WebGL canvas generally shortens the overall duration by a factor of 1.66.
 - There is no visible performance difference between both WebGL implementations.
+- The tracing profile suggest what WebGL-based solutions perform more consistent than a 2D canvas (fewer duration spikes).
 - Overall, render duration stays consistent across all test cases; only pixel extraction seems to be faster when using WebGL.
 
 #### Recommendations
