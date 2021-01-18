@@ -1,11 +1,11 @@
 {
-  "name": "javascript-video-processing-experiment",
+  "name": "javascript-video-processing-analysis",
   "version": "1.0.0",
   "description": "JavaScript real-time video processing using Canvas",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/dominique-mueller/javascript-video-processing-experiment"
+    "url": "https://github.com/dominique-mueller/javascript-video-processing-analysis"
   },
   "scripts": {
     "build": "react-scripts build",

@@ -1,6 +1,6 @@
 <div align="center">
 
-# javascript-video-processing-experiment
+# javascript-video-processing-analysis
 
 JavaScript real-time video processing using Canvas (2D, WebGL).
 
